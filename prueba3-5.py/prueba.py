@@ -18,69 +18,69 @@ def create_table():
 create_table()
 
 ventana=tk.Tk()
-ventana.title("Inicio de secion")	#Titulo de la ventana principal
-ventana.geometry("280x450+300+250")	#Tamaño de nuestra ventana Principal
+ventana.title("Inicio de secion")	
+ventana.geometry("280x450+300+250")	
 	
-color='#DC143C'			#Codigo HEX del color de fondo usado
-ventana['bg']=color		#Definimos nuestra ventana 'bg' con el valor 'color'
+color='#DC143C'			
+ventana['bg']=color		
 
-Label(ventana,bg=color,text="Login",font=("Arial Black",16)).pack()	#Mostramos texto 'Login'
+Label(ventana,bg=color,text="Login",font=("Arial Black",16)).pack()	
 
 
 #Cajas de nuestra ventana Principal
-Label(ventana,text="Usuario : ",bg=color,font=("Arial Black",10)).pack()	#Texto 'Usuario:'
-caja1=Entry(ventana,font=("Arial",10))										#Creamos una caja de texto 'caja1'
-caja1.pack()																#Posicion de la 'caja1'
-Label(ventana,text="Contraseña : ",bg=color,font=("Arial Black",10)).pack()	#Texto 'Contraseña:'
-caja2=Entry(ventana,show="*")												#Creamos la 'caja2' (contraseña)
-caja2.pack()																#Posicion de 'caja2'
+Label(ventana,text="Usuario : ",bg=color,font=("Arial Black",10)).pack()	
+caja1=Entry(ventana,font=("Arial",10))										
+caja1.pack()																
+Label(ventana,text="Contraseña : ",bg=color,font=("Arial Black",10)).pack()	
+caja2=Entry(ventana,show="*")												
+caja2.pack()																
 
-db=sqlite3.connect('login.db')		#Nos conectamos a nuestra base de datos 'login.db'
-c=db.cursor()						#Establecemos un cursor
+db=sqlite3.connect('login.db')		
+c=db.cursor()						
 
-def login():				#Funcion login ... Nos permitira comprobar 'usuario' y 'contraseña' con la base de datos
-	usuario=caja1.get()		#Obtenemos el valor de la 'caja1' (usuario)
-	contr=caja2.get()		#Obtenemos el valor de la 'caja2' (contraseña)
-	c.execute('SELECT * FROM empleados WHERE Usuario = ? AND Contraseña = ?',(usuario,contr))	#Seleccionamos datos '(usuario,contr)'
+def login():				
+	usuario=caja1.get()		
+	contr=caja2.get()		
+	c.execute('SELECT * FROM empleados WHERE Usuario = ? AND Contraseña = ?',(usuario,contr))	
 	if c.fetchall():
-		mb.showinfo(title="Login Correcto",message="Usuario y contraseña correctos")		#Mostramos 'Login Correcto'
+		mb.showinfo(title="Login Correcto",message="Usuario y contraseña correctos")		
 		ventana.destroy()
 	else:
-		mb.showerror(title="Login incorrecto",message="Usuario o contraseña incorrecto")	#Mostramos 'Login incorrecto'
+		mb.showerror(title="Login incorrecto",message="Usuario o contraseña incorrecto")	
 	#c.close()
 
-def nuevaVentana():							#Funcion nuevaVentana ... Nos permitira el registro de nuevos usuarios
-	newVentana=tk.Toplevel(ventana)			#Definimos 'newVentana'
-	newVentana.title("Registro de Usuario")	#Le damos el titulo 'Registro de Usuario'
-	newVentana.geometry("300x290+800+250")	#Tamaño de la ventana
-	newVentana['bg']=color					#Definimos newVentana 'bg' con el valor de 'color'
+def nuevaVentana():							
+	newVentana=tk.Toplevel(ventana)			
+	newVentana.title("Registro de Usuario")	
+	newVentana.geometry("300x290+800+250")	
+	newVentana['bg']=color					
 	
-	labelExample=tk.Label(newVentana,text="Registro : ",bg=color,font=("Arial Black",12)).pack(side="top")	#Texto 'Registro'
+	labelExample=tk.Label(newVentana,text="Registro : ",bg=color,font=("Arial Black",12)).pack(side="top")	
 	
 
-	Label(newVentana,text="Nombre : ",bg=color,font=("Arial Black",10)).pack()		#Texto 'Nombre:'
-	caja3=Entry(newVentana)															#Creamos 'caja3' (Nombre)
+	Label(newVentana,text="Nombre : ",bg=color,font=("Arial Black",10)).pack()		
+	caja3=Entry(newVentana)															
 	caja3.pack()
-	Label(newVentana,text="Apellidos : ",bg=color,font=("Arial Black",10)).pack()	#Texto 'Apellidos'
-	caja4=Entry(newVentana)															#Creamos 'caja4' (Apellidos)
+	Label(newVentana,text="Apellidos : ",bg=color,font=("Arial Black",10)).pack()	
+	caja4=Entry(newVentana)															
 	caja4.pack()
-	Label(newVentana,text="Usuario : ",bg=color,font=("Arial Black",10)).pack()		#Texto 'Usuario'
-	caja5=Entry(newVentana)															#Creamos 'caja5' (Usuario)
+	Label(newVentana,text="Usuario : ",bg=color,font=("Arial Black",10)).pack()		
+	caja5=Entry(newVentana)															
 	caja5.pack()
-	Label(newVentana,text="Contraseña : ",bg=color,font=("Arial Black",10)).pack()	#Texto 'Contraseña'
-	caja6=Entry(newVentana,show="*")												#Creamos 'caja6' (Contraseña)
+	Label(newVentana,text="Contraseña : ",bg=color,font=("Arial Black",10)).pack()	
+	caja6=Entry(newVentana,show="*")												
 	caja6.pack()	
-	Label(newVentana,text="Repita la Contraseña : ",bg=color,font=("Arial Black",10)).pack()	#Texto 'Repita la Contraseña'
-	caja7=Entry(newVentana,show="*")															#Creamos 'caja7' 
+	Label(newVentana,text="Repita la Contraseña : ",bg=color,font=("Arial Black",10)).pack()	
+	caja7=Entry(newVentana,show="*")															 
 	caja7.pack()
-	def registro():				#Funcion registro ... Nos permitira escribir los datos a nuestra base de datos
-		Nombre=caja3.get()		#Obtenemos el valor de 'caja3'
-		Apellido=caja4.get()	#Obtenemos el valor de 'caja4'
-		Usr_reg=caja5.get()		#Obtenemos el valor de 'caja5'
-		Contra_reg=caja6.get()	#Obtenemos el valor de 'caja6'
-		Contra_reg_2=caja7.get() #Obtenemos el valor de 'caja7'
-		if(Contra_reg==Contra_reg_2):		#Esta condicion nos permite saber si las contraseñas coinciden
-			#El siguiente comando es el encargado de insertar los datos obtenidos en el registro
+	def registro():				
+		Nombre=caja3.get()		
+		Apellido=caja4.get()	
+		Usr_reg=caja5.get()		
+		Contra_reg=caja6.get()	
+		Contra_reg_2=caja7.get() 
+		if(Contra_reg==Contra_reg_2):		
+			
 			c.execute("INSERT INTO empleados values(\'"+Nombre+"\',\'"+Apellido+"\',\'"+Usr_reg+"\',\'"+Contra_reg+"')")
 			db.commit()			#Confirmamos los datos
 			mb.showinfo(title="Registro Correcto",message="Hola "+Nombre+" "+Apellido+" ¡¡ \nSu registro fue exitoso.")
@@ -91,10 +91,10 @@ def nuevaVentana():							#Funcion nuevaVentana ... Nos permitira el registro de
 	#El siguiente comando (boton) nos permite llamar a la funcion registro
 	buttons=tk.Button(newVentana,text="Registro",command=registro,bg=color,font=("Arial Rounded MT Bold",10)).pack(side="bottom")
 	
-Label(ventana,text=" ",bg=color,font=("Arial",10)).pack()		#Solo es una linea vacia ... (lo use para separar el boton) 
-Button(text=" ENTRAR ",command=login,bg='#a6d4f2',font=("Arial Rounded MT Bold",10)).pack()		#Boton ==> funcion 'login'
+Label(ventana,text=" ",bg=color,font=("Arial",10)).pack()		 
+Button(text=" ENTRAR ",command=login,bg='#a6d4f2',font=("Arial Rounded MT Bold",10)).pack()		
 Label(ventana,text=" ",bg=color,font=("Arial Black",10)).pack()
-Label(ventana,text="¿No tienes una cuenta? ",bg=color,font=("Arial Black",10)).pack()		#Simple texto
+Label(ventana,text="¿No tienes una cuenta? ",bg=color,font=("Arial Black",10)).pack()		
 #La siguiente linea (boton) nos llama a la funcion 'nuevaVentana' ==> ( ventana de registro)
 boton1=Button(ventana,text="REGISTRATE",bg='#a6d4f2',command=nuevaVentana,font=("Arial Rounded MT Bold",10)).pack()
 
@@ -149,7 +149,7 @@ def limpiarCampos():
     miApellido.set("")
     miDireccion.set("")
     miCodigopostal.set("")
-    #textoComentario.delete(1,0,END)
+    
     
     
 def mensaje():
